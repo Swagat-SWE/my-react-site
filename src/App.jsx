@@ -48,8 +48,8 @@ export default function App() {
       {!showIntro && (
         <div className="flex min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
 
-          {/* Mobile Dropdown Menu */}
-            <div className="md:hidden p-4">
+          {/* Fixed Mobile menu navbar */}
+            <div className="md:hidden fixed top-0 left-0 right-0 z-40 p-4 bg-white/10 backdrop-blur-lg border-b border-white/20">
               <button
                 onClick={() => setOpen(!open)}
                 className="flex items-center gap-2 w-full py-2 px-3 bg-white/20 rounded-lg"
@@ -82,7 +82,7 @@ export default function App() {
                 </motion.ul>
               )}
             </AnimatePresence>
-          </div>
+        </div>
 
           {/* Sidebar */}
           <motion.aside
@@ -148,7 +148,7 @@ export default function App() {
           </motion.aside>
 
           {/* Main Content */}
-          <main className="flex-1 overflow-y-auto p-8">
+          <main className="flex-1 overflow-y-auto p-8 pt-24">
             <AnimatePresence mode="wait">
               {/* HOME SECTION */}
               {activeSection === "home" && (
