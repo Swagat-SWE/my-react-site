@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <>
-      {/* INTRO SCREEN */}
+      {/* INTRO SCREEN */} 
       <AnimatePresence mode="wait">
         {showIntro && (
           <motion.div
@@ -48,8 +48,54 @@ export default function App() {
       {!showIntro && (
         <div className="flex min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
 
+          {/* MOBILE HAMBURGER BUTTON */}       
+            <div className="md:hidden fixed top-4 left-4 z-50">
+            <button
+                onClick={() => setOpen(true)}
+                className="p-2 bg-white/20 backdrop-blur-md rounded-lg shadow-lg"
+            >   
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* MOBILE SLIDE-IN MENU */}
+<AnimatePresence>
+  {open && (
+    <motion.div
+      initial={{ x: -300 }}
+      animate={{ x: 0 }}
+      exit={{ x: -300 }}
+      transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      className="fixed top-0 left-0 w-64 h-full bg-white/10 backdrop-blur-xl p-6 z-50 shadow-xl"
+    >
+      <button
+        onClick={() => setOpen(false)}
+        className="mb-6 flex items-center gap-2"
+      >
+        <ChevronLeft /> Close
+      </button>
+
+      <ul className="space-y-3">
+        {sidebarItems.map((item) => (
+          <li
+            key={item.id}
+            onClick={() => {
+              handleSelect(item.id);
+              setOpen(false);
+            }}
+            className="cursor-pointer p-2 rounded-lg bg-white/10 hover:bg-white/20"
+          >
+            {item.label}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
           {/* Fixed Mobile menu navbar */}
-            <div className="md:hidden fixed top-0 left-0 right-0 z-40 p-4 bg-white/10 backdrop-blur-lg border-b border-white/20">
+            {/*<div className="md:hidden fixed top-0 left-0 right-0 z-40 p-4 bg-white/10 backdrop-blur-lg border-b border-white/20">
               <button
                 onClick={() => setOpen(!open)}
                 className="flex items-center gap-2 w-full py-2 px-3 bg-white/20 rounded-lg"
@@ -82,9 +128,9 @@ export default function App() {
                 </motion.ul>
               )}
             </AnimatePresence>
-        </div>
+        </div> */}
 
-          {/* Sidebar */}
+          {/* Sidebar */} 
           <motion.aside
             initial={{ x: -250 }}
             animate={{ x: 0 }}
